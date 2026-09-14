@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final api = BatteryApi();
       final info = await api.getBatteryInfo();
-      _batteryLevel = info.level.toString();
+      _batteryLevel = '${info.level}%';
     } on PlatformException catch (e) {
       _batteryLevel = "Failed to get battery level: '${e.message}'.";
     }

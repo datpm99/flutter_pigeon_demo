@@ -3,7 +3,13 @@ import UIKit
 
 private class BatteryApiImpl: BatteryApi {
   func getBatteryInfo() throws -> BatteryInfo {
-    return BatteryInfo(level: 80)
+      let device = UIDevice.current
+      device.isBatteryMonitoringEnabled = true
+      if device.batteryState == UIDevice.BatteryState.unknown {
+          return BatteryInfo(level: -1)
+      } else {
+          return BatteryInfo(level: Int64(device.batteryLevel * 100))
+      }
   }
 }
 
